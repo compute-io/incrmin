@@ -19,14 +19,50 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 To use the module,
 
 ``` javascript
-var lib = require( 'compute-incrmin' );
+var incrmin = require( 'compute-incrmin' );
 ```
+
+#### incrmin()
+
+Returns an initialized method to compute a minimum value incrementally.
+
+``` javascript
+var min = incrmin();
+```
+
+#### min( [value] )
+
+If provided a `value`, the method updates and returns the updated min. If not provided a `value`, the method returns the current min.
+
+``` javascript
+min( 2 );
+
+console.log( min( 1 ) );
+// returns 1
+
+min( 3 );
+
+console.log( min() );
+// returns 1
+```
+
+Note: if values have not yet been provided to `min()`, `min()` returns `null`.
 
 
 ## Examples
 
 ``` javascript
-var lib = require( 'compute-incrmin' );
+var incrmin = require( 'compute-incrmin' );
+
+// Initialize a method to calculate the min incrementally:
+var min = incrmin();
+
+// Simulate some data...
+for ( var i = 0; i < 1000; i++ ) {
+	min( Math.random() * 100 );
+}
+
+console.log( min() );
 ```
 
 To run the example code from the top-level application directory,
@@ -34,6 +70,10 @@ To run the example code from the top-level application directory,
 ``` bash
 $ node ./examples/index.js
 ```
+
+## Notes
+
+The use case for this module differs from the conventional [vector](https://github.com/compute-io/min) implementation and the [stream](https://github.com/flow-io/?query=min) implementation. Namely, this module decouples the act of updating the min from the act of consuming the min.
 
 
 ## Tests
