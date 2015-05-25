@@ -1,3 +1,5 @@
+'use strict';
+
 var incrmin = require( './../lib' );
 
 // Initialize a method to calculate the minimum value incrementally:
